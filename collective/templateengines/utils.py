@@ -6,6 +6,7 @@
 
 import sys
 import types
+import traceback
 
 from zope.interface import Interface
 
@@ -57,16 +58,24 @@ class Message:
         return [ Message(msg, level) for msg in msgs ]
     
     @staticmethod
+    def wrapCurrentException():
+        """ Call inside an exception handler to return the exception as message list format. """
+        tb_info = sys.exc_info()
+        return (None, [Message(tb_info[0], exception=tb_info)])        
+    
+    @staticmethod
     def wrapExceptions(func, *args, **kwargs):
-        """ Call function and wrap possible exceptions to ITemplateMessages
+        """ Call function and wrap possible exceptions to ITemplateMessages.
         
-        @return tuple (function result, [ITemplateMessage]) 
+        If exception is not raised return the result as is.
+                
+        @return: function result or tuple (None, [ITemplateMessage]) 
         """
         try:
-            return (func(*args, **kwargs), [])            
+            return func(*args, **kwargs)
         except Exception, e:
             tb_info = sys.exc_info()
-            return (None, [Message(str(e), traceback=tb_info)])
+            return (None, [Message(str(e), exception=tb_info)])
     
     
 def log_messages(logger, messages):
@@ -81,6 +90,19 @@ def log_messages(logger, messages):
             exc, note, traceback = msg.getException()
             logger.exception(exc)
             
+def dump_messages(messages, stream=sys.stdout):        
+    """ Print ITemplateMessage objects to standard output.
+    
+    @param messages: Sequence of ITemplateMessage objects
+    @param stream: Python file like object
+    """
+    for msg in messages:
+        print >> stream, msg.getMessage()
+        
+        exc, msg, tb = msg.getException()
+        traceback.print_tb(tb, file=stream)
+    
+    
             
 class DictionaryContext:
     """ Simple context holding exposed template variables in passthrough dictionary. """

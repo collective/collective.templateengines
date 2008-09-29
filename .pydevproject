@@ -6,4 +6,7 @@
 <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
 <path>/collective.templateengines</path>
 </pydev_pathproperty>
+<pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
+<path>/home/moo/workspace/lifematta/dependencies/django-trunk</path>
+</pydev_pathproperty>
 </pydev_project>

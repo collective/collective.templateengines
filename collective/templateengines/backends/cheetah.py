@@ -31,22 +31,24 @@ class Engine:
 
     """
     
-    zope.interface.implements(ITemplateEngine)
+    interface.implements(ITemplateEngine)
     
     def __init__(self):
         
         # Engine wide tags
         self.tags = {}
   
-    def loadString(str, lazy):
+    def loadString(self, str, lazy):
         
         if lazy:
             raise NotImplementedError("This is not implemented")
         
-        return Message.wrapExceptions(lambda: Template(text))
+        try:            
+            return Template(str), []
+        except Exception, e:
+            return Message.wrapCurrentException()
         
-        
-    def loadFile(file, lazy):
+    def loadFile(self, file, lazy):
         """ Load template from a file.
 
         This function never raises an exception, but returns errors as ITemplateMesssage list.
@@ -58,29 +60,28 @@ class Engine:
         """
         raise NotImplementedError("This is not implemented")
                 
-    def addTag(name, func):
+    def addTag(self, name, func):
         """ Register a new engine wide template tag.        
         """  
         
         # Cheetah does not have a global scope,
         # functions are added to the template context variables
         raise NotImplementedError("This is not implemented")
-            
+    
 class Template:
     """ Cheetah template wrapper.
     """
     
-    zope.interface.implements(ITemplate)    
+    interface.implements(ITemplate)    
     
     def __init__(self, text):
         
         self.text = text
-        self.catcher =  ListErrors()
         
         # Cheetah does not have separate phases for compiling and evaluation
         #
         
-    def evalute(context):
+    def evaluate(self, context):
         """
         """
    
@@ -88,9 +89,10 @@ class Template:
         exposeContextToFunctions(context)
         
         def wrapped():
-            self.template = CheetahTemplate(text, searchList=context.getMappings(), errorCatcher=self.catcher)
-            output = str(self.template)
-            return [output, Message.createFromStrings(self.catcher.listErrors())]
+            template = CheetahTemplate(self.text, searchList=context.getMappings(), errorCatcher="ListErrors")
+            output = str(template)
+            catcher = template.errorCatcher()
+            return [output, Message.createFromStrings(catcher.listErrors())]
         
         return Message.wrapExceptions(wrapped)
         

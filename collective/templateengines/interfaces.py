@@ -1,6 +1,6 @@
 """
 
-    Define interfaces to interact with template engines.
+    Define generic interfaces to interact with template engines.
     
     NOTE: Work is still much in the progress and not everything in these interfaces have been implemented.
 
@@ -46,7 +46,7 @@ class ITemplateEngine(Interface):
         TODO 
         """
 
-def ITemplate(Interface):
+class ITemplate(Interface):
     """ One loaded template. 
     
     This object is created by a template engine loading functions. It exposes
@@ -60,7 +60,7 @@ def ITemplate(Interface):
         @return (The result as string, [ list of ITemplateMessage objects ])
         """
         
-def ITemplateContext(Interface):
+class ITemplateContext(Interface):
     """ Expose Python objects to the template language. """
     
     
