@@ -1,0 +1,25 @@
+Metadata-Version: 1.0
+Name: collective.templateengines
+Version: 0.1dev-r0
+Summary: Generic interface for Python template engines
+Home-page: UNKNOWN
+Author: Mikko Ohtamaa
+Author-email: mikko@redinnovation.com
+License: GPL
+Description: Introduction
+        ============
+        
+        
+        
+        Changelog
+        =========
+        
+        0.1 - Unreleased
+        ----------------
+        
+        * Initial release
+        
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
