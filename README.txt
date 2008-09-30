@@ -10,14 +10,19 @@ Template Backend helps you to achieve
 
 * Clean your codebase from template language dependencies
 
+Motivation
+----------
+
+All template engines are bad. Sooner or later you want to try yet another of them,
+or someone else wants to use another template engine with your project. This product
+is aimed to make that transition as smooth as possible, maybe just one line change.
+
 Features
 --------
 
 * EGG deployment and easy install support (PyPi repository)
 
 * Interfaces defined using standard ``Zope interfaces <http://wiki.zope.org/Interfaces/FrontPage>``_ package
-
-* Secure context support (Zope, Plone)
 
 * Backends for: ``Django template Language <http://docs.djangoproject.com/en/dev/topics/templates/>``_, ``Cheetah <http://www.cheetahtemplate.org/>``_
 
@@ -28,11 +33,31 @@ Usage
 
 The following example shows how one can switch between Django templates and Cheetah.
 
+Cheetah::
+
+  from collective.templateengines.backends import cheetah
+
+  engine = cheetah.Engine()
+  context = DictionaryContext({"foo":"bar"})
+  template, syntax_errors = engine.loadString("Show variable $foo", False)
+  result, evaluation_errors = template.evaluate(context)
+  
+Django::
+
+  from collective.templateengines.backends import djangotemplates
+
+  engine = djangotemplates.Engine()
+  context = DictionaryContext({"foo":"bar"})
+  template, syntax_errors = engine.loadString("Show variable {{ foo", False)
+  result, evaluation_errors = template.evaluate(context)
+
 
 TODO
 ----
 
 * Generic mechanism to register template tags
+
+* Secure context support (Zope, Plone)
 
 Problems
 --------
@@ -41,10 +66,12 @@ Problems
 
 * Cheetah exposes the full Python namespace to templates by default, making it hard to secure it
 
+* Cheetah cannot traverse Zope functions or attributes
+
 Examples
 --------
 
 Python Template Engines is used in 
 
-* Easy Template product for Plone.
+* ``Easy Template product <http://plone.org/products/easy-template>``_ for Plone.
 

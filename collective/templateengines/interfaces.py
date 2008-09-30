@@ -9,7 +9,7 @@
 from zope.interface import Interface
 
 __author__ = "Mikko Ohtamaa <mikko@redinnovation.com>"
-__version__ = "0.1"
+__version__ = "0.1" # Match with egg package version
 __docformat__ = "epytext"
 __copyright__ = "2008 Red Innovation Oy"
 __license__ = "3-clause BSD"
@@ -83,7 +83,9 @@ class ITemplateMessage(Interface):
     """
     
     def getLevel():
-        """ One of Python logging package levels
+        """ One of Python logging package levels.
+        
+        E,g. logging.WARNING, logging.INFO. This is used to filter debugging output.
         """
         
     def getMessage():
@@ -92,6 +94,8 @@ class ITemplateMessage(Interface):
         
     def getDebugInfo():
         """ Many lines of template language specific debugging info attached to the message.
+        
+        @return: plain text string
         """
         
     def getException():

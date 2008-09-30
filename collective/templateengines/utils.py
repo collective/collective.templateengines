@@ -22,7 +22,11 @@ from zope import interface
 from collective.templateengines.interfaces import *
 
 class Message:
-    """ Generic message implementation. """
+    """ Generic message implementation. 
+    
+    This class has helper functions to convert string and exception objects
+    to wrapped messages.
+    """
     
     interface.implements(ITemplateMessage)
     
@@ -85,8 +89,9 @@ def log_messages(logger, messages):
     @param messages: Sequence of ITemplateMessage objects
     """
     for msg in messages: 
+        assert ITemplateMessage.providedBy(msg)
         logger.log(msg.getLevel(), msg.getMessage())
-        if msg.getTraceback():
+        if msg.getException():
             exc, note, traceback = msg.getException()
             logger.exception(exc)
             
@@ -97,6 +102,8 @@ def dump_messages(messages, stream=sys.stdout):
     @param stream: Python file like object
     """
     for msg in messages:
+        print str(msg)
+        assert ITemplateMessage.providedBy(msg)
         print >> stream, msg.getMessage()
         
         exc, msg, tb = msg.getException()
