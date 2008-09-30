@@ -13,7 +13,7 @@ Template Backend helps you to achieve
 Motivation
 ----------
 
-All template engines are bad. Sooner or later you want to try yet another of them,
+All template engines have their shortcomings. Sooner or later you want to try yet another of them,
 or someone else wants to use another template engine with your project. This product
 is aimed to make that transition as smooth as possible, maybe just one line change.
 
@@ -31,7 +31,8 @@ Features
 Usage
 -----
 
-The following example shows how one can switch between Django templates and Cheetah.
+The following example shows how one can switch between Django and Cheetah template engines with one line of change.
+Naturally, the templates themselves need to be refactored.
 
 Cheetah::
 
@@ -74,4 +75,15 @@ Examples
 Python Template Engines is used in 
 
 * ``Easy Template product <http://plone.org/products/easy-template>``_ for Plone.
+
+Author
+------
+
+Mikko Ohtamaa
+
+``Red Innovation Oy <http://www.redinnovation.com>``_ - Python hackers for hire
+
+
+
+
 
