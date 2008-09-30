@@ -1,5 +1,4 @@
 README.txt
-setup.cfg
 setup.py
 collective/__init__.py
 collective.templateengines.egg-info/PKG-INFO

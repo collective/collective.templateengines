@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: collective.templateengines
-Version: 0.1dev-r0
+Version: 0.1
 Summary: Generic interface for Python template engines
 Home-page: UNKNOWN
 Author: Mikko Ohtamaa
@@ -18,14 +18,19 @@ Description: Introduction
         
         * Clean your codebase from template language dependencies
         
+        Motivation
+        ----------
+        
+        All template engines have their shortcomings. Sooner or later you want to try yet another of them,
+        or someone else wants to use another template engine with your project. This product
+        is aimed to make that transition as smooth as possible, maybe just one line change.
+        
         Features
         --------
         
         * EGG deployment and easy install support (PyPi repository)
         
         * Interfaces defined using standard ``Zope interfaces <http://wiki.zope.org/Interfaces/FrontPage>``_ package
-        
-        * Secure context support (Zope, Plone)
         
         * Backends for: ``Django template Language <http://docs.djangoproject.com/en/dev/topics/templates/>``_, ``Cheetah <http://www.cheetahtemplate.org/>``_
         
@@ -34,13 +39,34 @@ Description: Introduction
         Usage
         -----
         
-        The following example shows how one can switch between Django templates and Cheetah.
+        The following example shows how one can switch between Django and Cheetah template engines with one line of change.
+        Naturally, the templates themselves need to be refactored.
+        
+        Cheetah::
+        
+        from collective.templateengines.backends import cheetah
+        
+        engine = cheetah.Engine()
+        context = DictionaryContext({"foo":"bar"})
+        template, syntax_errors = engine.loadString("Show variable $foo", False)
+        result, evaluation_errors = template.evaluate(context)
+        
+        Django::
+        
+        from collective.templateengines.backends import djangotemplates
+        
+        engine = djangotemplates.Engine()
+        context = DictionaryContext({"foo":"bar"})
+        template, syntax_errors = engine.loadString("Show variable {{ foo", False)
+        result, evaluation_errors = template.evaluate(context)
         
         
         TODO
         ----
         
         * Generic mechanism to register template tags
+        
+        * Secure context support (Zope, Plone)
         
         Problems
         --------
@@ -56,7 +82,18 @@ Description: Introduction
         
         Python Template Engines is used in
         
-        * Easy Template product for Plone.
+        * ``Easy Template product <http://plone.org/products/easy-template>``_ for Plone.
+        
+        Author
+        ------
+        
+        Mikko Ohtamaa
+        
+        ``Red Innovation Oy <http://www.redinnovation.com>``_ - Python hackers for hire
+        
+        
+        
+        
         
         
         Changelog
@@ -68,6 +105,7 @@ Description: Introduction
         * Initial release
         
         
+Keywords: template templates engine python interface zope cheetah django backend utils generic
 Platform: UNKNOWN
 Classifier: Programming Language :: Python
 Classifier: Topic :: Software Development :: Libraries :: Python Modules

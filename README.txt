@@ -22,9 +22,9 @@ Features
 
 * EGG deployment and easy install support (PyPi repository)
 
-* Interfaces defined using standard ``Zope interfaces <http://wiki.zope.org/Interfaces/FrontPage>``_ package
+* Interfaces defined using standard `Zope interfaces <http://wiki.zope.org/Interfaces/FrontPage>`_ package
 
-* Backends for: ``Django template Language <http://docs.djangoproject.com/en/dev/topics/templates/>``_, ``Cheetah <http://www.cheetahtemplate.org/>``_
+* Backends for: `Django template Language <http://docs.djangoproject.com/en/dev/topics/templates/>`_, `Cheetah <http://www.cheetahtemplate.org/>`_
 
 * Unit test suite
 
@@ -74,14 +74,14 @@ Examples
 
 Python Template Engines is used in 
 
-* ``Easy Template product <http://plone.org/products/easy-template>``_ for Plone.
+* `Easy Template product <http://plone.org/products/easy-template>`_ for Plone.
 
 Author
 ------
 
 Mikko Ohtamaa
 
-``Red Innovation Oy <http://www.redinnovation.com>``_ - Python hackers for hire
+`Red Innovation Oy, Oulu, Finland <http://www.redinnovation.com>`_ - High quality Python hackers for hire
 
 
 
