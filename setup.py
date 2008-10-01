@@ -6,8 +6,7 @@ version = '0.1'
 setup(name='collective.templateengines',
       version=version,
       description="Generic interface for Python template engines",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description=open("README.txt").read() + open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
@@ -20,7 +19,7 @@ setup(name='collective.templateengines',
       url='http://pypi.python.org/pypi?%3Aaction=pkg_edit&name=collective.templateengines',
       license='License :: OSI Approved :: BSD License',
       packages=find_packages(exclude=['ez_setup']),
-      namespace_packages=['collective', 'collective.templateengines'],
+      namespace_packages=['collective'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[

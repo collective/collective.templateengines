@@ -2,15 +2,15 @@ Metadata-Version: 1.0
 Name: collective.templateengines
 Version: 0.1
 Summary: Generic interface for Python template engines
-Home-page: UNKNOWN
+Home-page: http://pypi.python.org/pypi?%3Aaction=pkg_edit&name=collective.templateengines
 Author: Mikko Ohtamaa
 Author-email: mikko@redinnovation.com
-License: 3-Clause BSD
+License: License :: OSI Approved :: BSD License
 Description: Introduction
-        =================
+        ============
         
-        Python Template Engines is an pluggable template language backend manager for Python.
-        It defines generic interfaces which you can use to communicate with any template language.
+        collective.templateengines  is an pluggable template language backend manager for Python.
+        It defines generic interfaces which abstracts template language basic interfaction.
         
         Template Backend helps you to achieve
         
@@ -30,9 +30,9 @@ Description: Introduction
         
         * EGG deployment and easy install support (PyPi repository)
         
-        * Interfaces defined using standard ``Zope interfaces <http://wiki.zope.org/Interfaces/FrontPage>``_ package
+        * Interfaces defined using standard `Zope interfaces <http://wiki.zope.org/Interfaces/FrontPage>`_ package
         
-        * Backends for: ``Django template Language <http://docs.djangoproject.com/en/dev/topics/templates/>``_, ``Cheetah <http://www.cheetahtemplate.org/>``_
+        * Backends for: `Django template Language <http://docs.djangoproject.com/en/dev/topics/templates/>`_, `Cheetah <http://www.cheetahtemplate.org/>`_
         
         * Unit test suite
         
@@ -82,15 +82,14 @@ Description: Introduction
         
         Python Template Engines is used in
         
-        * ``Easy Template product <http://plone.org/products/easy-template>``_ for Plone.
+        * `Easy Template product <http://plone.org/products/easy-template>`_ for Plone.
         
         Author
         ------
         
         Mikko Ohtamaa
         
-        ``Red Innovation Oy <http://www.redinnovation.com>``_ - Python hackers for hire
-        
+        `Red Innovation Oy, Oulu, Finland <http://www.redinnovation.com>`_ - High quality Python hackers for hire
         
         
         

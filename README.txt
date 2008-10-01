@@ -1,8 +1,8 @@
 Introduction
-=================
+============
 
-Python Template Engines is an pluggable template language backend manager for Python. 
-It defines generic interfaces which you can use to communicate with any template language.
+collective.templateengines  is an pluggable template language backend manager for Python. 
+It defines generic interfaces which abstracts template language basic interfaction.
 
 Template Backend helps you to achieve
 
