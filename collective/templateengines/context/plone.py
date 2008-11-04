@@ -41,7 +41,8 @@ class ArchetypesSecureContext:
             "portal_url" : getToolByName(context, 'portal_url'),
             "object_url" : context.absolute_url(),
             "user" : security.getUser(),
-            "request" : context.REQUEST
+            "request" : context.REQUEST,
+            "uid" : context.UID() # Archetypes unique identifier number
         }
         
         if expose_schema:
