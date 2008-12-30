@@ -40,7 +40,7 @@ class ITemplateEngine(Interface):
         @return: (ITemplate object or None, [ list of ITemplateMessage objects ])
         """
         
-    def addTag(name, func):
+    def addTag(name, tag):
         """ Register a new engine wide template tag.
         
         TODO 
@@ -61,7 +61,10 @@ class ITemplate(Interface):
         """
         
 class ITemplateContext(Interface):
-    """ Expose Python objects to the template language. """
+    """ Expose Python objects to the template language. 
+    
+    TODO: Needs polish
+    """
     
     
     def addMapping(name, obj):
@@ -103,3 +106,24 @@ class ITemplateMessage(Interface):
         
         @return: tuple (exception, message, traceback)
         """
+        
+class ITag(Interface):
+    """ Simple function exposed to the template engine. 
+    
+    This allows call the function with context and parameters. E.g::
+    
+        {% do_random_crap("foo", "bar") %}
+    """
+    
+    def getName():
+        """
+        @return: Name of the tag as used in templates
+        """
+    
+    def render(context, *args, **kwargs):
+        """
+        @param context: ITemplateContext
+        @return generated document code as string 
+        """
+    
+        

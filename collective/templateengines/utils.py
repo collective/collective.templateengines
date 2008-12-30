@@ -65,7 +65,7 @@ class Message:
     def wrapCurrentException():
         """ Call inside an exception handler to return the exception as message list format. """
         tb_info = sys.exc_info()
-        return (None, [Message(tb_info[0], exception=tb_info)])        
+        return (None, [Message(str(tb_info[0]) + str(tb_info[1]), exception=tb_info)])        
     
     @staticmethod
     def wrapExceptions(func, *args, **kwargs):
@@ -109,7 +109,6 @@ def dump_messages(messages, stream=sys.stdout):
         exc, msg, tb = msg.getException()
         traceback.print_tb(tb, file=stream)
     
-    
             
 class DictionaryContext:
     """ Simple context holding exposed template variables in passthrough dictionary. """
@@ -125,34 +124,4 @@ class DictionaryContext:
     def getMappings(self):
         return self.mappings
     
-        
-def exposeContextToFunctions(context):
-    """ A hack function to expose the template context to functions in 
-    engines which do not pass the context around (Cheetah).
     
-    We add context directly as a variable to the function object itself.
-    This of course kills performance on non CPython implementations and
-    is not thread safe!!
-    
-    A proper solution would be use some sort of interfaces thread specific storage,
-    but this does it for now.
-    """
-        
-    # TODO: Temporary hack - cheetah does not pass template context to the functions
-    # We add namespace directly as a function attribute, 
-    # so that it is accessible in the function without
-    # explitcly passing it there. There must be a smarter
-    # way to do this, but Cheetag docs didn't tell it.
-    # This is not threadsafe, but Zope doesn't use threads...        
-    mappings = context.getMappings()
-    
-    for func in mappings.values():
-        if type(func) == types.FunctionType:
-            func.namespace = mappings
-    
-        
-    
-    
-    
-    
-        

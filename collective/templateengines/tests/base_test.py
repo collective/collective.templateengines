@@ -14,6 +14,8 @@ import unittest
 from collective.templateengines.utils import DictionaryContext, dump_messages
 from collective.templateengines.interfaces import *
 
+from collective.templateengines.context.tags import TestTag
+
 class BaseTemplateEngineTestCase:
     """ Implement few tests for any template backend. """
     
@@ -30,10 +32,13 @@ class BaseTemplateEngineTestCase:
         """ Return template using foo variable. """
         raise RuntimeError("Subclasses must implement this")
 
+    def getTestTagTemplate(self):
+        """ Return template using foo function. """
+        raise RuntimeError("Subclasses must implement this")
+
     def getBrokenTemplate(self):
         """ Return template having syntax errors. """
         raise RuntimeError("Subclasses must implement this")
-
     
     def test_success(self):
         """ Test succesful Cheetah template. """
@@ -63,15 +68,9 @@ class BaseTemplateEngineTestCase:
         
         context = DictionaryContext({})
         
-        # No #endraw
         template, errors = engine.loadString(self.getBrokenTemplate(), False)
         
-        self.assertEqual(len(errors), 0)
-        self.assertTrue(ITemplate.providedBy(template))
-        
-        result, messages = template.evaluate(context)
-        self.assertEqual(result, None)
-        self.assertEqual(len(messages), 1)      
+        self.assertEqual(len(errors), 1)
         
     def test_missing_var(self):
         """ Test template having a missing variable. """
@@ -88,7 +87,33 @@ class BaseTemplateEngineTestCase:
         self.assertEqual(len(messages), 1)
         self.assertEqual(result, None)
 
+    def test_custom_tag(self):
+        """ Test that adding custom tags via ITag interface works """
+
+        engine = self.getEngine()
         
+        context = DictionaryContext({})
+        
+        tag = TestTag()
+        
+        engine.addTag(tag)
+        
+        template, errors = engine.loadString(self.getTestTagTemplate(), False)
+        
+        if errors:
+            dump_messages(errors)
+
+        self.assertEqual(len(errors), 0)
+        self.assertTrue(ITemplate.providedBy(template))        
+        
+        result, errors = template.evaluate(context)
+
+        if errors:
+            dump_messages(errors)
+
+        self.assertEqual(len(errors), 0)
+        self.assertEqual(result, u"bar is 123")
+
         
 if __name__ == "__main__":
     unittest.main() # run all tests
