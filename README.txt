@@ -10,6 +10,8 @@ Template Backend helps you to achieve
 
 * Clean your codebase from template language dependencies
 
+* Interface for getting objectized error and debug output from the template engine
+
 Motivation
 ----------
 

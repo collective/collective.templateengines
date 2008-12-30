@@ -19,7 +19,7 @@ from Cheetah.Template import Template as CheetahTemplate
 from Cheetah.ErrorCatchers import ListErrors
 
 from collective.templateengines.interfaces import *
-from collective.templateengines.utils import Message, exposeContextToFunctions
+from collective.templateengines.utils import Message, TagProxy
 
 
 class Engine:
@@ -36,7 +36,7 @@ class Engine:
     def __init__(self):
         
         # Engine wide tags
-        self.tags = {}
+        self.tags = []
   
     def loadString(self, str, lazy):
         
@@ -44,7 +44,7 @@ class Engine:
             raise NotImplementedError("This is not implemented")
         
         try:            
-            return Template(str), []
+            return Template(self, str), []
         except Exception, e:
             return Message.wrapCurrentException()
         
@@ -60,13 +60,10 @@ class Engine:
         """
         raise NotImplementedError("This is not implemented")
                 
-    def addTag(self, name, func):
+    def addTag(self, tag):
         """ Register a new engine wide template tag.        
         """  
-        
-        # Cheetah does not have a global scope,
-        # functions are added to the template context variables
-        raise NotImplementedError("This is not implemented")
+        self.tags.append(tag)
     
 class Template:
     """ Cheetah template wrapper.
@@ -74,9 +71,10 @@ class Template:
     
     interface.implements(ITemplate)    
     
-    def __init__(self, text):
+    def __init__(self, engine, text):
         
         self.text = text
+        self.engine = engine
         
         # Cheetah does not have separate phases for compiling and evaluation
         #
@@ -84,17 +82,19 @@ class Template:
     def evaluate(self, context):
         """
         """
-   
-        # TODO: This is very ugly and not thread safe
-        exposeContextToFunctions(context)
-        
+           
         def wrapped():
-            template = CheetahTemplate(self.text, searchList=context.getMappings(), errorCatcher="ListErrors")
+            
+           # In Jinja, custom tags go directly to the template context
+            tagged_context = context.getMappings().copy()        
+            for tag in self.engine.tags:                            
+                tagged_context[tag.getName()] = TagProxy(context, tag)
+            
+            template = CheetahTemplate(self.text, searchList=tagged_context, errorCatcher="ListErrors")
             output = str(template)
             catcher = template.errorCatcher()
             return [output, Message.createFromStrings(catcher.listErrors())]
         
         return Message.wrapExceptions(wrapped)
         
-    
     

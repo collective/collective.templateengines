@@ -69,8 +69,9 @@ class BaseTemplateEngineTestCase:
         context = DictionaryContext({})
         
         template, errors = engine.loadString(self.getBrokenTemplate(), False)
-        
-        self.assertEqual(len(errors), 1)
+        #
+        #self.assertEqual(len(errors), 1)
+        raise RuntimeError("This test b0rks - don't know why unclosed #if is accepted")
         
     def test_missing_var(self):
         """ Test template having a missing variable. """

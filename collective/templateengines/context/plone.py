@@ -59,4 +59,9 @@ class ArchetypesSecureContext:
     def getMappings(self):
         return self.namespace
     
+    def getTraversingContext(self):
+        """ Get zope traversing context - don't confuse context with context! """
+        return self.namespace["context"]
+        
+    
     

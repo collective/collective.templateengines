@@ -101,30 +101,7 @@ class Template:
             return Message.wrapCurrentException()
         
                                             
-class TagProxy:
-    """ Map collective.templateengines Tag interface to Jinja implementation.
-    
-    All generic collective.templatenegines tags are exposed to Jinja through this implementatin.
-    """
-    
-    
-    
-    def __init__(self, context, tag):
-        """ 
-        
-        @param tag: ITag interface implementor
-        """
-        if not ITag.providedBy(tag):
-            raise RuntimeError("Invalid tag declaration:" + str(tag))
-        
-        self.context = context
-        self.tag = tag
-        
-    def __call__(self, *args, **kwargs):
-        """ Internally ITag uses Jinja calling convention so we do direct argument mapping here. """
-                
-        return self.tag.render(self.context, *args, **kwargs)
-        
+
         
 
 

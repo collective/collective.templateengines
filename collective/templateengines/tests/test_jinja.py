@@ -12,7 +12,7 @@ import unittest
 
 from base_test import BaseTemplateEngineTestCase
 
-from collective.templateengines.utils import DictionaryContext
+from collective.templateengines.utils import DictionaryContext, TagProxy
 from collective.templateengines.interfaces import *
 from collective.templateengines.backends import jinja
 

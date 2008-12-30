@@ -24,6 +24,10 @@ class CheetahTestCase(BaseTemplateEngineTestCase, unittest.TestCase):
         """ Return template using foo variable. """
         return "$foo"
     
+    def getTestTagTemplate(self):
+        """ Return template using foo function. """
+        return "$test_tag('123')"    
+    
     def getBrokenTemplate(self):
         """ Return template having syntax errors. """
         return "#if"
