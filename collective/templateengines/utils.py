@@ -26,9 +26,17 @@ class Message:
     
     This class has helper functions to convert string and exception objects
     to wrapped messages.
+    
+    TODO: Convert to instance service which can be given to the engine as a environment parameter.
     """
     
     interface.implements(ITemplateMessage)
+    
+    # List of exceptions which should not be automatically wrapped
+    # and are handled by the lower parts of the framework using
+    # collective.templateengines. 
+    # E.g. Zope's Unauthorized exceptions
+    unwrappableExceptions = []
     
     def __init__(self, message, level=logging.ERROR, exception=None, debug=None):
         """
@@ -55,6 +63,17 @@ class Message:
     def getDebugInfo(self):
         return self.debug
     
+    @staticmethod
+    def isUnwrappable(e):
+        """ Return True if exception should not be converted to Message instance
+        @param e: Exception     
+        """
+        for ue in Message.unwrappableExceptions:
+            if isinstance(e, ue):
+                return True
+            
+        return False
+    
     @staticmethod 
     def createFromStrings(msgs, level=logging.ERROR):
         """ Create error messages from strings.
@@ -64,7 +83,8 @@ class Message:
     @staticmethod
     def wrapCurrentException():
         """ Call inside an exception handler to return the exception as message list format. """
-        tb_info = sys.exc_info()
+                
+        tb_info = sys.exc_info()            
         return (None, [Message(str(tb_info[0]) + str(tb_info[1]), exception=tb_info)])        
     
     @staticmethod
@@ -78,6 +98,10 @@ class Message:
         try:
             return func(*args, **kwargs)
         except Exception, e:
+            
+            if Message.isUnwrappable(e):
+                raise e
+            
             tb_info = sys.exc_info()
             return (None, [Message(str(e), exception=tb_info)])
     

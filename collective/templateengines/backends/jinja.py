@@ -16,7 +16,7 @@ from jinja2 import Environment, StrictUndefined
 
 from zope import interface
 from collective.templateengines.interfaces import *
-from collective.templateengines.utils import Message
+from collective.templateengines.utils import Message, TagProxy
 
 #class RaiseExceptionAlwaysUndefined(Undefined):
     
@@ -29,10 +29,14 @@ class Engine:
     
     interface.implements(ITemplateEngine)
     
-    def __init__(self):
+    def __init__(self, env=None):
         
         # Raise exception always when a variable is missing
-        self.env = Environment(undefined=StrictUndefined)
+        if env:
+            self.env = env
+        else:
+            self.env = Environment(undefined=StrictUndefined)
+            
         self.tags = []
         
     def loadString(self, s, lazy):
@@ -42,7 +46,6 @@ class Engine:
         
         if lazy:
             raise NotImplementedError("This is not implemented")        
-        
         
         
         try:
@@ -94,11 +97,11 @@ class Template:
         tagged_context = context.getMappings().copy()        
         for tag in self.engine.tags:            
             tagged_context[tag.getName()] = TagProxy(context, tag)
-        
-        try:
+            
+        def applier():
             return self.template.render(tagged_context), []
-        except Exception, e:
-            return Message.wrapCurrentException()
+        
+        return Message.wrapExceptions(applier)
         
                                             
 

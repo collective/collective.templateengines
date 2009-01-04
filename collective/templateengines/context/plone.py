@@ -9,6 +9,7 @@ __copyright__ = "2008 Red Innovation Oy"
 __license__ = "3-Clause BSD"
 
 from zope import interface
+from zope.app.component.hooks import getSite
 
 from collective.templateengines.interfaces import *
 
@@ -36,7 +37,10 @@ class ArchetypesSecureContext:
         
         security=getSecurityManager()
         
+        site = getSite()
+
         self.namespace = {
+            "portal" : site,
             "context" : context,
             "portal_url" : getToolByName(context, 'portal_url'),
             "object_url" : context.absolute_url(),
@@ -44,6 +48,7 @@ class ArchetypesSecureContext:
             "request" : context.REQUEST,
             "uid" : context.UID() # Archetypes unique identifier number
         }
+        
         
         if expose_schema:
             schema = context.Schema()
