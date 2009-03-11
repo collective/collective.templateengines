@@ -47,9 +47,11 @@ class Engine:
         if lazy:
             raise NotImplementedError("This is not implemented")        
         
-        
         try:
-            return Template(self, s.decode("utf-8")), [] 
+            if type(s) == type(u""):
+                return Template(self, s), [] 
+            else:
+                return Template(self, s.decode("utf-8")), [] 
         except Exception, e:
             return Message.wrapCurrentException()
         
