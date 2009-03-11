@@ -49,7 +49,7 @@ class Engine:
         
         
         try:
-            return Template(self, s), [] 
+            return Template(self, s.decode("utf-8")), [] 
         except Exception, e:
             return Message.wrapCurrentException()
         
