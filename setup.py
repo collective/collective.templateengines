@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1.1'
+version = '0.3.0'
 
 setup(name='collective.templateengines',
       version=version,
@@ -15,7 +15,7 @@ setup(name='collective.templateengines',
         ],
       keywords='template templates engine python interface zope cheetah django backend utils generic',
       author='Mikko Ohtamaa',
-      author_email='mikko@redinnovation.com',
+      author_email='mikko.ohtamaa@twinapex.com',
       url='http://pypi.python.org/pypi?%3Aaction=pkg_edit&name=collective.templateengines',
       license='License :: OSI Approved :: BSD License',
       packages=find_packages(exclude=['ez_setup']),

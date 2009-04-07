@@ -1,37 +1,50 @@
-Introduction
-============
+collective.templateengines  is an template language backend manager for Python. 
+It defines generic Zope interfaces for communicating with various Python template engines 
+to achieve higher code reuse value.
 
-collective.templateengines  is an pluggable template language backend manager for Python. 
-It defines generic interfaces which abstracts template language basic interfaction.
-
-Template Backend helps you to achieve
-
-* Easy, pluggable, template language switching
-
-* Clean your codebase from template language dependencies
-
-* Interface for getting objectized error and debug output from the template engine
-
-Motivation
-----------
-
-All template engines have their shortcomings. Sooner or later you want to try yet another of them,
-or someone else wants to use another template engine with your project. This product
-is aimed to make that transition as smooth as possible, maybe just one line change.
+This package is still much in development. All contributions and comments are welcome.
 
 Features
 --------
 
-* EGG deployment and easy install support (PyPi repository)
+collective.templateengines helps you to achieve
+
+* Easy, pluggable, template language switching. Write special tag code only once and use it across all template engines.
+
+* Clean your codebase from template language dependencies.
+
+* Generic error and warning reporting mechanism across template engines.
+
+Motivation
+----------
+
+All template engines have their shortcomings. Sooner or later you want to try yet another engine,
+or someone else wants to use another template engine within your project. This package
+is aimed to make that transition as smooth as possible.
+
+Features
+--------
+
+* egg deployment and easy install support from PyPi repository
 
 * Interfaces defined using standard `Zope interfaces <http://wiki.zope.org/Interfaces/FrontPage>`_ package
 
-* Backends for: `Django template Language <http://docs.djangoproject.com/en/dev/topics/templates/>`_, `Cheetah <http://www.cheetahtemplate.org/>`_
+* Backends for Django template Language, Cheetah and Jinja2
 
-* Unit test suite
+* Unit tests
+
+Installation
+------------
+
+- Install collective.templateengines egg
+
+- Install any of following template engine eggs: Django, Jinja2, Cheetah
 
 Usage
 -----
+
+Please take a look on `collective.easytemplate <http://plone.org/products/easy-template>`_ package how to support switching
+between template engines and registering tags for them.
 
 The following example shows how one can switch between Django and Cheetah template engines with one line of change.
 Naturally, the templates themselves need to be refactored.
@@ -51,16 +64,23 @@ Django::
 
   engine = djangotemplates.Engine()
   context = DictionaryContext({"foo":"bar"})
-  template, syntax_errors = engine.loadString("Show variable {{ foo", False)
+  template, syntax_errors = engine.loadString("Show variable {{ foo }}", False)
   result, evaluation_errors = template.evaluate(context)
-
-
-TODO
+  
+  
+Tags
 ----
 
-* Generic mechanism to register template tags
+collective.templateengine uses term tag to refer to functions which you can use in the template engine context. 
+In the future tags are indended to be expanded to cover template language structures as well.
 
-* Secure context support (Zope, Plone)
+collective.templateengines does not come with any tags out of the box. To define tags, I recommend
+you to take a look on collective.easytemplate package.
+
+- Tags provide collective.templateengines.interfaces.ITag interface
+
+- Tags are registered to the template engine using Engine.addTag() function.
+
 
 Problems
 --------
@@ -78,12 +98,22 @@ Python Template Engines is used in
 
 * `Easy Template product <http://plone.org/products/easy-template>`_ for Plone.
 
-Author
-------
+Links
+-----
 
-Mikko Ohtamaa
+`Jinja2 template engines <http://jinja.pocoo.org/2/>`_
 
-`Red Innovation Oy, Oulu, Finland <http://www.redinnovation.com>`_ - High quality Python hackers for hire
+`Django templates <http://docs.djangoproject.com/en/dev/ref/templates/>`_
+
+`Cheetah template engine <http://www.cheetahtemplate.org/>`_
+
+
+Authors
+-------
+
+Mikko Ohtamaa <mikko.ohtamaa@twinapex.com>
+
+`Twinapex Research, Oulu, Finland <http://www.twinapex.com>`_ - High quality Python hackers for hire
 
 
 

@@ -117,13 +117,13 @@ class ITag(Interface):
     
     def getName():
         """
-        @return: Name of the tag as used in templates
+        @return: String, name of the tag as used in templates
         """
     
     def render(context, *args, **kwargs):
         """
         @param context: ITemplateContext
-        @return generated document code as string 
+        @return: generated document code as string 
         """
     
         

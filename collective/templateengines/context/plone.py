@@ -10,6 +10,7 @@ __license__ = "3-Clause BSD"
 
 from zope import interface
 from zope.app.component.hooks import getSite
+from zope.component import getMultiAdapter, getSiteManager
 
 from collective.templateengines.interfaces import *
 
@@ -37,6 +38,10 @@ class ArchetypesSecureContext:
         
         security=getSecurityManager()
         
+        #portal_state = getMultiAdapter((context, context.REQUEST), name=u'plone_portal_state')
+        
+        portal_state = context.restrictedTraverse("@@plone_portal_state")
+        
         site = getSite()
 
         self.namespace = {
@@ -46,9 +51,9 @@ class ArchetypesSecureContext:
             "object_url" : context.absolute_url(),
             "user" : security.getUser(),
             "request" : context.REQUEST,
-            "uid" : context.UID() # Archetypes unique identifier number
-        }
-        
+            "uid" : context.UID(), # Archetypes unique identifier number
+            "portal_state" : portal_state
+        }        
         
         if expose_schema:
             schema = context.Schema()
