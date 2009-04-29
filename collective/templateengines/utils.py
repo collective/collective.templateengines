@@ -51,6 +51,11 @@ class Message:
         self.exception = exception
         self.debug = debug
         
+        
+    def __str__(self):
+        """ Helper function to easy error output from code. """
+        return str(self.level) + ":" + str(self.message)
+        
     def getLevel(self):
         return self.level
     

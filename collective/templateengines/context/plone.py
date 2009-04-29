@@ -59,10 +59,13 @@ class ArchetypesSecureContext:
             schema = context.Schema()
             for f in schema.fields():
                 name = f.getName()
-                value = f.get(context)
-                self.namespace[name] = value
-
-        
+                try:
+                    value = f.get(context)
+                    self.namespace[name] = value
+                except TypeError:
+                    # membrane field "listed" gives TypeError, don't know why
+                    pass
+                
     def addMapping(self, name, var):
         self.namespace[name] = var
         
