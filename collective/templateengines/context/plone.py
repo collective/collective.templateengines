@@ -61,6 +61,11 @@ class ArchetypesSecureContext:
                 name = f.getName()
                 try:
                     value = f.get(context)
+                    
+                    # Make sure that template engine receives all variables in Unicode
+                    if isinstance(value, str):
+                        value = value.decode("utf-8")
+                    
                     self.namespace[name] = value
                 except TypeError:
                     # membrane field "listed" gives TypeError, don't know why
