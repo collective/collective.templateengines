@@ -1,12 +1,15 @@
-from setuptools import setup, find_packages
 import os
+from setuptools import setup, find_packages
 
-version = '0.3.0'
+def read(*rnames):
+    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+
+version = '0.3.2'
 
 setup(name='collective.templateengines',
       version=version,
-      description="Generic interface for Python template engines",
-      long_description=open("README.txt").read(),
+      description="Template engine abstraction layer for Python",
+      long_description=open("README.txt").read() + read('docs', 'HISTORY.txt'),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
@@ -16,7 +19,7 @@ setup(name='collective.templateengines',
       keywords='template templates engine python interface zope cheetah django backend utils generic',
       author='Mikko Ohtamaa',
       author_email='mikko.ohtamaa@twinapex.com',
-      url='http://pypi.python.org/pypi?%3Aaction=pkg_edit&name=collective.templateengines',
+      url='http://www.twinapex.com/for-developers/open-source/for-plone/easy-template',
       license='License :: OSI Approved :: BSD License',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['collective'],

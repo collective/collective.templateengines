@@ -1,4 +1,6 @@
-collective.templateengines  is an template language backend manager for Python. 
+.. contents:: :depth: 2
+
+collective.templateengines  is an template engine abstraction layer for Python. 
 It defines generic Zope interfaces for communicating with various Python template engines 
 to achieve higher code reuse value.
 
@@ -9,11 +11,21 @@ Features
 
 collective.templateengines helps you to achieve
 
-* Easy, pluggable, template language switching. Write special tag code only once and use it across all template engines.
+* Easy, pluggable, template language switching. Write template tag code only once and use it across all template engines
+  using abstracted tag plug-ings
 
-* Clean your codebase from template language dependencies.
+* Clean your codebase from template engine dependencies
 
-* Generic error and warning reporting mechanism across template engines.
+* Generic error and warning reporting mechanism across template engines
+
+* EGG deployment and easy_install support from PyPi repository
+
+* Interfaces defined using standard `Zope interfaces <http://wiki.zope.org/Interfaces/FrontPage>`_ package
+
+* Backends for Django template Language, Cheetah and Jinja2
+
+* Unit tests
+
 
 Motivation
 ----------
@@ -21,17 +33,6 @@ Motivation
 All template engines have their shortcomings. Sooner or later you want to try yet another engine,
 or someone else wants to use another template engine within your project. This package
 is aimed to make that transition as smooth as possible.
-
-Features
---------
-
-* egg deployment and easy install support from PyPi repository
-
-* Interfaces defined using standard `Zope interfaces <http://wiki.zope.org/Interfaces/FrontPage>`_ package
-
-* Backends for Django template Language, Cheetah and Jinja2
-
-* Unit tests
 
 Installation
 ------------
@@ -108,14 +109,19 @@ Links
 `Cheetah template engine <http://www.cheetahtemplate.org/>`_
 
 
-Authors
--------
+Author
+------
 
-Mikko Ohtamaa <mikko.ohtamaa@twinapex.com>
+`Twinapex Team <mailto:info@twinapex.com>`_ - Python and Plone professionals for hire. 
 
-`Twinapex Research, Oulu, Finland <http://www.twinapex.com>`_ - High quality Python hackers for hire
+* `Twinapex company site <http://www.twinapex.com>`_ (`Twinapex-yritysryhmä <http://www.twinapex.fi>`_)
 
+* `Twinapex company blog <http://blog.twinapex.fi>`_
 
+* `Twinapex mobile site <http://www.twinapex.mobi>`_
 
+* `More about Plone <http://www.twinapex.com/products/plone>`_ (`Lisätietoja Plone-julkaisujärjestelmästä <http://www.twinapex.fi/tuotteet/plone>`_)
+
+* `Other open source Plone products by Twinapex <http://www.twinapex.com/for-developers/open-source/for-plone>`_
 
 

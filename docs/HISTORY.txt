@@ -1,13 +1,31 @@
 Changelog
-=========
+---------
+
+0.3.1 - 0.3.2
+=============
+
+* Fixed unicode problems with Archetypes accessors
+
+* Documentation clean ups
+
+
+0.3.0 - 0.3.1
+=============
+
+* Fixed problem in plone.py with problematic Archetypes schema fields
+
+0.1.1 - 0.3.0
+=============
+
+* Major rework
 
 0.1 - 0.1.1
------------
+=============
 
 * Fixing PyPi deployment problems
 
 0.1 
-----------------
+=============
 
 * Initial release
 
