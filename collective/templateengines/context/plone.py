@@ -16,6 +16,7 @@ from collective.templateengines.interfaces import *
 
 from AccessControl import ClassSecurityInfo
 from AccessControl import getSecurityManager
+from AccessControl import Unauthorized
 
 from Products.CMFCore.utils import getToolByName
 
@@ -40,7 +41,11 @@ class ArchetypesSecureContext:
         
         #portal_state = getMultiAdapter((context, context.REQUEST), name=u'plone_portal_state')
         
-        portal_state = context.restrictedTraverse("@@plone_portal_state")
+        try:
+            portal_state = context.restrictedTraverse("@@plone_portal_state")
+        except Unauthorized:
+            # portal_state may be limited to admin users only
+            portal_state = None
         
         site = getSite()
 
