@@ -46,7 +46,7 @@ class ArchetypesSecureContext:
         except Unauthorized:
             # portal_state may be limited to admin users only
             portal_state = None
-        
+                            
         site = getSite()
 
         self.namespace = {
@@ -55,10 +55,16 @@ class ArchetypesSecureContext:
             "portal_url" : getToolByName(context, 'portal_url'),
             "object_url" : context.absolute_url(),
             "user" : security.getUser(),
-            "request" : context.REQUEST,
-            "uid" : context.UID(), # Archetypes unique identifier number
+            "request" : context.REQUEST,            
             "portal_state" : portal_state
-        }        
+        }   
+        
+        try:
+            # Archetypes unique identifier number
+            # not available on non-archetypes content
+            self.namespace["UID"] = context.UID()  
+        except:
+            pass
         
         if expose_schema:
             schema = context.Schema()
