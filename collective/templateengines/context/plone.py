@@ -46,6 +46,11 @@ class ArchetypesSecureContext:
         except Unauthorized:
             # portal_state may be limited to admin users only
             portal_state = None
+        except AttributeError:
+            # traversing it not yet proplerly set.up
+            # may happen with some contexts
+            portal_state = None
+            
                             
         site = getSite()
 
