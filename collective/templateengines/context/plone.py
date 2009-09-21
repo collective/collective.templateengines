@@ -8,6 +8,7 @@ __author__ = "Mikko Ohtamaa <mikko@redinnovation.com>"
 __copyright__ = "2008 Red Innovation Oy"
 __license__ = "3-Clause BSD"
 
+
 from zope import interface
 from zope.app.component.hooks import getSite
 from zope.component import getMultiAdapter, getSiteManager
