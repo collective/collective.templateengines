@@ -47,17 +47,19 @@ class ArchetypesSecureContext:
             # portal_state may be limited to admin users only
             portal_state = None
         except AttributeError:
-            # traversing it not yet proplerly set.up
-            # may happen with some contexts
+            # traversing it not yet proplerly set up
+            # may happen with some contexts, e.g. with LinguaPlone translate
             portal_state = None
             
-                            
+                                
         site = getSite()
+        
+        portal_url = site.portal_url
 
         self.namespace = {
             "portal" : site,
             "context" : context,
-            "portal_url" : getToolByName(context, 'portal_url'),
+            "portal_url" : portal_url,
             "object_url" : context.absolute_url(),
             "user" : security.getUser(),
             "request" : context.REQUEST,            
