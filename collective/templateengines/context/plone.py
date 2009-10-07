@@ -21,6 +21,8 @@ from AccessControl import Unauthorized
 
 from Products.CMFCore.utils import getToolByName
 
+from Products.Archetypes.interfaces import IBaseObject
+ 
 class ArchetypesSecureContext:
     """ Wrap Archetypes object inside a secure context.
     
@@ -74,7 +76,10 @@ class ArchetypesSecureContext:
         except:
             pass
         
-        if expose_schema:
+        if expose_schema and IBaseObject.providedBy(context):
+            
+            # The following applies to Archetypes objects only
+            
             schema = context.Schema()
             for f in schema.fields():
                 name = f.getName()
@@ -100,5 +105,6 @@ class ArchetypesSecureContext:
         """ Get zope traversing context - don't confuse context with context! """
         return self.namespace["context"]
         
+    
     
     
