@@ -57,7 +57,10 @@ class ArchetypesSecureContext:
                                 
         site = getSite()
         
-        portal_url = site.portal_url
+        # Site might not have portal url when it is being duplicated through ZMI...
+        # corner cases... you must love them!
+        portal_url = getattr(site, "portal_url", None)
+        
 
         self.namespace = {
             "portal" : site,
