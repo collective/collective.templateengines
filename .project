@@ -3,6 +3,7 @@
 	<name>collective.templateengines</name>
 	<comment></comment>
 	<projects>
+		<project>omelette</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
