@@ -1,6 +1,14 @@
 Changelog
 ---------
 
+0.3.2 - 0.3.4
+=============
+
+* Fixed various problems when context or HTTP request was
+  not available or they were "special" in Plone templates [miohtama] 
+  
+* Fixed compatibility issues with LinguaPlone [miohtama]
+
 0.3.1 - 0.3.2
 =============
 

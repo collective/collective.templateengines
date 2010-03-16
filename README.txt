@@ -108,20 +108,22 @@ Links
 
 `Cheetah template engine <http://www.cheetahtemplate.org/>`_
 
+Source code
+-----------
 
-Author
-------
+* https://svn.plone.org/svn/collective/collective.templateengines/trunk
 
-`Twinapex Team <mailto:info@twinapex.com>`_ - Python and Plone professionals for hire. 
+Authors
+-------
 
-* `Twinapex company site <http://www.twinapex.com>`_ (`Twinapex-yritysryhmä <http://www.twinapex.fi>`_)
+`mFabrik Research Oy <mailto:info@mfabrik.com>`_ - Python and Plone professionals for hire.
 
-* `Twinapex company blog <http://blog.twinapex.fi>`_
+* `mFabrik web site <http://mfabrik.com>`_ 
 
-* `Twinapex mobile site <http://www.twinapex.mobi>`_
+* `mFabrik mobile site <http://mfabrik.mobi>`_ 
 
-* `More about Plone <http://www.twinapex.com/products/plone>`_ (`Lisätietoja Plone-julkaisujärjestelmästä <http://www.twinapex.fi/tuotteet/plone>`_)
+* `Blog <http://blog.mfabrik.com>`_
 
-* `Other open source Plone products by Twinapex <http://www.twinapex.com/for-developers/open-source/for-plone>`_
+* `More about Plone <http://mfabrik.com/technology/technologies/content-management-cms/plone>`_ 
 
 
