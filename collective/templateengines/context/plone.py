@@ -10,7 +10,10 @@ __license__ = "3-Clause BSD"
 
 
 from zope import interface
-from zope.app.component.hooks import getSite
+try:
+    from zope.app.component.hooks import getSite
+except ImportError:
+    from zope.component.hooks import getSite
 from zope.component import getMultiAdapter, getSiteManager
 
 from collective.templateengines.interfaces import *
